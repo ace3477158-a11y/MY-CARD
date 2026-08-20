@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>點擊分享電子名片</title>
+  <!-- 載入 LINE LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; background-color:#f4f4f9; margin:0;">
+
+  <div style="text-align:center; padding:30px; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); width:80%; max-width:320px;">
+    <h2 style="color:#333; margin-bottom:10px;">電子名片準備完成</h2>
+    <p style="color:#666; font-size:14px; margin-bottom:24px;">點擊下方按鈕，選擇好友即可將卡片傳送給對方</p>
+    <button id="shareBtn" style="padding:14px 28px; background:#00B900; color:white; border:none; border-radius:50px; font-size:16px; font-weight:bold; cursor:pointer; width:100%;">
+      傳送電子名片給好友
+    </button>
+  </div>
+
+  <script>
+    // ⚠️ 貼入你在步驟二取得的 LIFF ID
+    const MY_LIFF_ID = "2011167758-ixNpElmO";
+
+    async function main() {
+      // 初始化 LIFF
+      await liff.init({ liffId: MY_LIFF_ID });
+
+      // 如果尚未登入，自動引導登入
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
+      }
+
+      // 點擊按鈕跳出好友選擇器
+      document.getElementById('shareBtn').addEventListener('click', async () => {
+        if (liff.isApiAvailable('shareTargetPicker')) {
+          try {
+            const result = await liff.shareTargetPicker([
+              {
+                type: "flex",
+                altText: "這是我的個人電子名片",
+                contents: 
+                /* {
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "url": "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
+    "size": "full",
+    "aspectRatio": "20:13",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "https://line.me/"
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "雪杯工坊COFFEE&TEA",
+        "weight": "bold",
+        "size": "xl"
+      },
+      {
+        "type": "box",
+        "layout": "baseline",
+        "margin": "md",
+        "contents": [
+          {
+            "type": "icon",
+            "size": "sm",
+            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
+          },
+          {
+            "type": "icon",
+            "size": "sm",
+            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
+          },
+          {
+            "type": "icon",
+            "size": "sm",
+            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
+          },
+          {
+            "type": "icon",
+            "size": "sm",
+            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
+          },
+          {
+            "type": "icon",
+            "size": "sm",
+            "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png"
+          },
+          {
+            "type": "text",
+            "text": "4.0",
+            "size": "sm",
+            "color": "#999999",
+            "margin": "md",
+            "flex": 0
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Place",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 1
+              },
+              {
+                "type": "text",
+                "text": "桃園市桃園區復興路248號",
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "Time",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 1
+              },
+              {
+                "type": "text",
+                "text": "10:00 - 20:00",
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "CALL",
+          "uri": "https://line.me/"
+        }
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "uri",
+          "label": "WEBSITE",
+          "uri": "https://line.me/"
+        }
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [],
+        "margin": "sm"
+      }
+    ],
+    "flex": 0
+  }
+}*/
+                {
+                  "type": "bubble",
+                  "hero": {
+                    "type": "image",
+                    "url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+                    "size": "full",
+                    "aspectRatio": "20:13",
+                    "aspectMode": "cover"
+                  },
+                  "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      { "type": "text", "text": "個人電子名片", "weight": "bold", "size": "xl" }
+                    ]
+                  }
+                }
+              }
+            ]);
+            if (result) {
+              alert("名片分享成功！");
+            }
+          } catch (error) {
+            console.error("分享失敗:", error);
+          }
+        } else {
+          alert("請直接在 LINE App 內開啟此連結以使用分享功能。");
+        }
+      });
+    }
+
+    main();
+  </script>
+</body>
+</html>
