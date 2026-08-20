@@ -18,209 +18,134 @@
   </div>
 
   <script>
-    // ⚠️ 貼入你在步驟二取得的 LIFF ID
     const MY_LIFF_ID = "2011167758-McazVXQB";
 
     async function main() {
-      // 初始化 LIFF
-      await liff.init({ liffId: MY_LIFF_ID });
+      try {
+        // 初始化 LIFF
+        await liff.init({ liffId: MY_LIFF_ID });
 
-      // 如果尚未登入，自動引導登入
-      if (!liff.isLoggedIn()) {
-        liff.login();
-        return;
-      }
+        // 如果尚未登入，自動引導登入
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
 
-      // 點擊按鈕跳出好友選擇器
-      document.getElementById('shareBtn').addEventListener('click', async () => {
-        if (liff.isApiAvailable('shareTargetPicker')) {
-          try {
-            const result = await liff.shareTargetPicker([
-              {
-                type: "flex",
-                altText: "這是我的個人電子名片",
-                contents: 
-                /* {
-  "type": "bubble",
-  "hero": {
-    "type": "image",
-    "url": "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
-    "size": "full",
-    "aspectRatio": "20:13",
-    "aspectMode": "cover",
-    "action": {
-      "type": "uri",
-      "uri": "https://line.me/"
-    }
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "雪杯工坊COFFEE&TEA",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
-        "type": "box",
-        "layout": "baseline",
-        "margin": "md",
-        "contents": [
-          {
-            "type": "icon",
-            "size": "sm",
-            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-          },
-          {
-            "type": "icon",
-            "size": "sm",
-            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-          },
-          {
-            "type": "icon",
-            "size": "sm",
-            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-          },
-          {
-            "type": "icon",
-            "size": "sm",
-            "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
-          },
-          {
-            "type": "icon",
-            "size": "sm",
-            "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png"
-          },
-          {
-            "type": "text",
-            "text": "4.0",
-            "size": "sm",
-            "color": "#999999",
-            "margin": "md",
-            "flex": 0
-          }
-        ]
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "Place",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 1
-              },
-              {
-                "type": "text",
-                "text": "桃園市桃園區復興路248號",
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "Time",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 1
-              },
-              {
-                "type": "text",
-                "text": "10:00 - 20:00",
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "spacing": "sm",
-    "contents": [
-      {
-        "type": "button",
-        "style": "link",
-        "height": "sm",
-        "action": {
-          "type": "uri",
-          "label": "CALL",
-          "uri": "https://line.me/"
-        }
-      },
-      {
-        "type": "button",
-        "style": "link",
-        "height": "sm",
-        "action": {
-          "type": "uri",
-          "label": "WEBSITE",
-          "uri": "https://line.me/"
-        }
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [],
-        "margin": "sm"
-      }
-    ],
-    "flex": 0
-  }
-}*/
+        // 點擊按鈕跳出好友選擇器
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+          if (liff.isApiAvailable('shareTargetPicker')) {
+            try {
+              const result = await liff.shareTargetPicker([
                 {
-                  "type": "bubble",
-                  "hero": {
-                    "type": "image",
-                    "url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
-                    "size": "full",
-                    "aspectRatio": "20:13",
-                    "aspectMode": "cover"
-                  },
-                  "body": {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                      { "type": "text", "text": "個人電子名片", "weight": "bold", "size": "xl" }
-                    ]
+                  "type": "flex",
+                  "altText": "雪杯工坊COFFEE&TEA - 個人電子名片",
+                  "contents": {
+                    "type": "bubble",
+                    "hero": {
+                      "type": "image",
+                      "url": "https://developers-resource.landpress.line.me/fx/img/01_1_cafe.png",
+                      "size": "full",
+                      "aspectRatio": "20:13",
+                      "aspectMode": "cover",
+                      "action": {
+                        "type": "uri",
+                        "uri": "https://line.me/"
+                      }
+                    },
+                    "body": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "雪杯工坊COFFEE&TEA",
+                          "weight": "bold",
+                          "size": "xl"
+                        },
+                        {
+                          "type": "box",
+                          "layout": "baseline",
+                          "margin": "md",
+                          "contents": [
+                            { "type": "icon", "size": "sm", "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png" },
+                            { "type": "icon", "size": "sm", "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png" },
+                            { "type": "icon", "size": "sm", "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png" },
+                            { "type": "icon", "size": "sm", "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png" },
+                            { "type": "icon", "size": "sm", "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png" },
+                            {
+                              "type": "text",
+                              "text": "4.0",
+                              "size": "sm",
+                              "color": "#999999",
+                              "margin": "md",
+                              "flex": 0
+                            }
+                          ]
+                        },
+                        {
+                          "type": "box",
+                          "layout": "vertical",
+                          "margin": "lg",
+                          "spacing": "sm",
+                          "contents": [
+                            {
+                              "type": "box",
+                              "layout": "baseline",
+                              "spacing": "sm",
+                              "contents": [
+                                { "type": "text", "text": "Place", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                                { "type": "text", "text": "桃園市桃園區復興路248號", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                              ]
+                            },
+                            {
+                              "type": "box",
+                              "layout": "baseline",
+                              "spacing": "sm",
+                              "contents": [
+                                { "type": "text", "text": "Time", "color": "#aaaaaa", "size": "sm", "flex": 1 },
+                                { "type": "text", "text": "10:00 - 20:00", "wrap": true, "color": "#666666", "size": "sm", "flex": 5 }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "footer": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "spacing": "sm",
+                      "contents": [
+                        {
+                          "type": "button",
+                          "style": "link",
+                          "height": "sm",
+                          "action": { "type": "uri", "label": "CALL", "uri": "https://line.me/" }
+                        },
+                        {
+                          "type": "button",
+                          "style": "link",
+                          "height": "sm",
+                          "action": { "type": "uri", "label": "WEBSITE", "uri": "https://line.me/" }
+                        }
+                      ],
+                      "flex": 0
+                    }
                   }
                 }
+              ]);
+              if (result) {
+                alert("名片分享成功！");
               }
-            ]);
-            if (result) {
-              alert("名片分享成功！");
+            } catch (error) {
+              console.error("分享失敗:", error);
             }
-          } catch (error) {
-            console.error("分享失敗:", error);
+          } else {
+            alert("請直接在 LINE App 內開啟此連結以使用分享功能。");
           }
-        } else {
-          alert("請直接在 LINE App 內開啟此連結以使用分享功能。");
-        }
-      });
+        });
+      } catch (initError) {
+        console.error("LIFF 初始化失敗:", initError);
+      }
     }
 
     main();
